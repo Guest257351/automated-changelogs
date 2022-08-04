@@ -3,11 +3,19 @@ import requests  # noqa We are just importing this to prove the dependency insta
 
 
 def main():
-    my_input = os.environ["INPUT_MYINPUT"]
+    commits = os.environ["github.event.commits"]
 
-    my_output = f"Hello {my_input}"
+    version = os.environ["github.run_number"]
 
-    print(f"::set-output name=myOutput::{my_output}")
+    messages = '\n'.join([i.message for i in commits])
+
+    changelog = f"""Version {version}
+```md
+{messages}
+```
+"""
+
+    print(f"::set-output name=myOutput::{changelog}")
 
 
 if __name__ == "__main__":
