@@ -3,9 +3,9 @@ import requests  # noqa We are just importing this to prove the dependency insta
 
 
 def main():
-    commits = os.environ["github.event.commits"]
+    commits = os.environ["commits"]
 
-    version = os.environ["github.run_number"]
+    version = os.environ["versionNo"]
 
     messages = '\n'.join([i.message for i in commits])
 
